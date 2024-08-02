@@ -9,4 +9,4 @@ elif(marks >= 70 and marks < 80):
 else:
     grade = "D"
 
-    print("grade of the student ->",grade)
+print("grade of the student ->",grade)
