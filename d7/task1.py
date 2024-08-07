@@ -1,10 +1,5 @@
 #Python program to interchange first and last elements in a list
+a=[2,3,5,6,7]
 
-a=[1,2,3,4,5]
-reversed_a = a[::-1]
-print(reversed_a)#type1
-
-print(a[-1: :-1])#type2
-
-a.reverse()#type3
+a[0], a[-1] = a[-1], a[0]
 print(a)
