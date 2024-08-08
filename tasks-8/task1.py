@@ -1,0 +1,1 @@
+# Reverse a list without using .reverse method or [::-1] use.....use logic to reverse it.

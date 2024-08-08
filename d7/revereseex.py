@@ -6,3 +6,5 @@ print(a[-1: :-1])#type2
 
 a.reverse()#type3
 print(a)
+
+
