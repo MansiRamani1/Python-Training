@@ -15,3 +15,8 @@ for n in d:
 for n in d:
     print(d[n])#give the return value
 
+print(list(d.values()))
+print(list(d.keys()))
+
+for key,value in d.items():
+    print(key,value)
