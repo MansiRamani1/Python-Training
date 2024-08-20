@@ -7,7 +7,7 @@ print()
 
 x=datetime.datetime.now()
 print(x.strftime("%y"))#return number of recent year 24
-print(x.strftime("%m"))#month
+print(x.strftime("%m"))#month number
 print(x.strftime("%H"))#recent hour according 24 hour
-
+print(x.strftime("%h"))#month name
 
