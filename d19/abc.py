@@ -9,5 +9,8 @@ dic={}
 for key, val in lst.items():  
         dic[val*2]=key*2
 print(dic)
+
+ 
+     
        
  
