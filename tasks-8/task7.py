@@ -5,6 +5,7 @@ array=list(a)
 print(array)
 
 string="".join(array)
+
 print(string)
 
 
