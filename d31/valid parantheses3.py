@@ -1,8 +1,8 @@
-# Example 1:
-# Input: s = "()"
-# Output: true
 
-s="()"
+# Example 4:
+# Input: s = "([])"
+# Output: true
+s="[()]"
 
 count=0
 
@@ -21,12 +21,3 @@ else:
     print("true")
   else:
     print("false")
-
-    # if count>0:
-    #     print("false")
-        
-  
-
-
-
-

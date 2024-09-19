@@ -8,10 +8,8 @@
 # Output: 58
 # Explanation: L = 50, V= 5, III = 3.
 
-# Example 3:
-# Input: s = "MCMXCIV"
-# Output: 1994
-# Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
+
+
 
     
 

@@ -1,8 +1,8 @@
-# Example 1:
-# Input: s = "()"
+# Example 2:
+# Input: s = "()[]{}"
 # Output: true
 
-s="()"
+s="(][]{}"
 
 count=0
 
@@ -15,18 +15,13 @@ for i in s:
         count+=1
     elif i=="]":
         count-=1
+    elif i=="{":
+        count+=1
+    elif i=="}":
+        count-=1
     
 else:
   if count==0:
     print("true")
   else:
     print("false")
-
-    # if count>0:
-    #     print("false")
-        
-  
-
-
-
-
