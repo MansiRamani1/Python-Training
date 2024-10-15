@@ -84,7 +84,7 @@ def delete_task(task_id:str):
 def delete_task(task_id:str):
    try:
        id=ObjectId(task_id)
-       exesting_doc = collection.find_one({"_id": id, "is_deleted": False})
+       exesting_doc = collection.find_one({"_id": id})
        if not exesting_doc:
            return HTTPException(status_code=404, detail=f"Task does not exits")
        collection.delete_one({"_id":id})
