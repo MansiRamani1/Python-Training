@@ -14,5 +14,7 @@ uri = f"mongodb+srv://{username}:{password}@cluster0.jnepj.mongodb.net/?retryWri
 client = MongoClient(uri, server_api=ServerApi('1'))
             
 db=client.task_imp
-item_collection=db["item_master"]
+# item_collection=db["item_master"]
 user_collection=db["user_master"]
+user_item_collection=db["user_item_map"]
+purchase_collection=db["purchase_master"]
