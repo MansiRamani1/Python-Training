@@ -18,3 +18,4 @@ db=client.task_imp
 user_collection=db["user_master"]
 user_item_collection=db["user_item_map"]
 purchase_collection=db["purchase_master"]
+sell_collection=db["sell_master"]
