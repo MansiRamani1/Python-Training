@@ -12,7 +12,7 @@ router=APIRouter()
 def item_list():
   data=list(db["item_master"].find())#data=list(item_collection.find())
   for item in data:
-        item["_id"] = str(item["_id"])
+        item["_id"] = str(item["_id"])#return data json format
   return data
 
 
@@ -90,7 +90,7 @@ def purchase_item(item_id:str,user_id:str):
 
         purchase_item_price=item_find["price"]
         current_balance=user_find["balance"]-purchase_item_price
-        
+        print(current_balance)
         user_collection.update_one({"_id":user_id},{"$set":{"balance":current_balance}})
         purchaseitem={
                        "user_id":user_find["_id"],
@@ -108,33 +108,46 @@ def purchase_item(item_id:str,user_id:str):
 
 
 @router.post("/show_user_item")
-def purchase_item_list(user_id:str):
+def purchase_item_list(user_id:str,item_id:str):
     try:
         user=user_collection.find_one({"_id":ObjectId(user_id)})
-
+        item=db["item_master"].find_one({"_id":ObjectId(item_id)})
+        
         if not user:
             return HTTPException(status_code=404, detail=f"Task does not exits")
         
-        purchased_items=user_item_collection.find_one({"user_id":user_id})#6718ba3e7de3d1cbf7e8c460
-        print(purchased_items)
+        if not item:
+            return HTTPException(status_code=404, detail=f"Task does not exits")
+        
+        purchased_items=user_item_collection.find_one({"user_id":user_id,"item_id":item_id})
+        
         if not purchased_items:
             return HTTPException(status_code=404, detail="User has not purchased any item")
-            
-        inserted_items=[]
         
-        for item in purchased_items:
-                   user_purchase_item={
-                       "user_id":user_id,#6718ba3e7de3d1cbf7e8c460
-                       "item_id":item["item_id"],#get item_id
-                       "created_at":int(datetime.timestamp(datetime.now()))#generate
-                      }        
-                   existing_doc=sell_collection.insert_one(user_purchase_item)#store user_id,item_id,created_at in sell_master
-                   inserted_items.append(str(existing_doc.inserted_id)) #inserted_id is mongodb_id,convert string
-                   
-        return{"status_code":200,"message":"Add Sucessfully"} 
+        update_balance=user["balance"]+item["price"]
+        user_collection.update_one({"_id":user_id},{"$set":{"balance":update_balance}})
 
+        user_item_collection.delete_one({"user_id": user_id, "item_id": item_id})
+        purchaseitem={
+                       "user_id":user["_id"],
+                       "item_id":item["_id"],
+                       "created_at":int(datetime.timestamp(datetime.now()))
+        }   
+        print(purchaseitem)    
+        existing_doc=sell_collection.insert_one(purchaseitem)
+        return{"status_code":200,"message": "get successfully",
+	    #  "payload":[
+		#    {
+		# 	"item_id":"6718b7667de3d1cbf7e8c459",
+		# 	"item_name":"shoes"
+		#    },
+		#    {
+		# 	"item_id":"6718b7417de3d1cbf7e8c458",
+		# 	"item_name":"chia"
+		#    }
+	    #   ]
+         }  
     except Exception as e:
             return HTTPException(status_code=500, detail=f"Some error occured{e}")
-
-    
+           
 app.include_router(router)
